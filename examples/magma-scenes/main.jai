@@ -2,6 +2,7 @@
 
 Basic :: #import "Basic";
 Crater :: #import "Crater";
+Magma :: #import "Magma";
 
 #load "../../common/magma-helpers.jai";
 

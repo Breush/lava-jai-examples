@@ -1,5 +1,4 @@
 Chamber :: #import "Chamber";
-Magma :: #import "Magma";
 
 magma_helper_make_cube :: (scene : *Magma.Scene, sideLength : float) -> *Magma.Mesh {
     mesh := Magma.create_mesh(scene);

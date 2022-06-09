@@ -3,6 +3,9 @@
 Basic :: #import "Basic";
 Crater :: #import "Crater";
 
+// Enable VR module-wide. This adds a build & runtime dependency to OpenXR.
+Magma :: #import "Magma"(VR_ENABLED=true);
+
 #load "../../common/magma-helpers.jai";
 
 main :: () {

@@ -3,7 +3,7 @@ Compiler :: #import "Compiler";
 File :: #import "File";
 String :: #import "String";
 
-#load "../lava/modules/Sill/meta.jai";
+#load "../lava/modules/Sill/plugin.jai";
 
 make_example_workspace :: (exampleName : string) {
     Basic.set_working_directory(#filepath);
@@ -25,10 +25,10 @@ make_example_workspace :: (exampleName : string) {
     if options.os_target == .LINUX {
         arguments: [..] string;
         Basic.array_add(*arguments, "-rpath=$ORIGIN");
+        Basic.array_add(*arguments, Basic.tprint("-rpath=%../lava/bindings/StbTrueType", #filepath));
         Basic.array_add(*arguments, Basic.tprint("-rpath=%../lava/bindings/Vulkan", #filepath));
         Basic.array_add(*arguments, Basic.tprint("-rpath=%../lava/bindings/Shaderc", #filepath));
         Basic.array_add(*arguments, Basic.tprint("-rpath=%../lava/bindings/OpenXr", #filepath));
-        Basic.array_add(*arguments, Basic.tprint("-rpath=%../lava/bindings/Xcb", #filepath));
         options.additional_linker_arguments = arguments;
     }
 
@@ -43,7 +43,8 @@ make_example_workspace :: (exampleName : string) {
         if !message break;
         if message.workspace != workspace continue;
 
-        sill_meta_handle_message(message);
+        // @note One can use the -plug Sill/plugin instead.
+        sill_plugin_message(null, message);
 
         if message.kind == .COMPLETE {
             break;
